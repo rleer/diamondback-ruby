@@ -89,6 +89,7 @@ let () =
   let loader = File_loader.create File_loader.EmptyCfg conf.idirectory in
   let cfg = build_cfg loader in
     (*Cfg_printer.print_stmt stderr cfg;*)
+    Cfg_printer.CodePrinter.print_stmt stdout cfg;
     if conf.type_inference then analyze_cfg loader cfg;
     Log.flush ();
     flush stdout;
