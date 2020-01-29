@@ -11,6 +11,8 @@ let _ =
     exit 1
   end;
   let fname = Sys.argv.(1) in
+  let ofname = Filename.chop_extension fname in
+  let () = printf "Translate %s into RIL\n" fname in
   let ast = 
     try Parse_helper.parse_file fname
     with Invalid_argument(_) -> parse_file fname
@@ -18,7 +20,7 @@ let _ =
 (*  let loader = File_loader.create File_loader.EmptyCfg "../std-lib" in*)
   let stmt = Cfg_refactor.refactor_ast ast in
 (*  let stmt = Cfg_scope.resolve_scopes loader stmt in*)
-  let oc = open_out "output.rb" in
+  let oc = open_out (ofname^"-ril.rb") in
   let () = CodePrinter.print_stmt oc stmt in
   let () = CodePrinter.print_stmt stdout stmt in
   let () = close_out oc in

@@ -37,10 +37,11 @@ PRINT_PROG = $(OCamlProgram print_cfg, print_cfg)
 TAGS: $(addsuffix .ml, $(FILES))
 	otags $+
 
-install: $(DRUBY_PROG) $(SAFE_EVAL_PROG)
+install: $(DRUBY_PROG) $(SAFE_EVAL_PROG) $(PRINT_PROG)
 	mkdir -p $(DESTDIR)$(BINDIR)
 	install -m 755 druby $(DESTDIR)$(BINDIR)
 	install -m 755 safe_eval $(DESTDIR)$(BINDIR)
+	install -m 755 print_cfg $(DESTDIR)$(BINDIR)
 
 uninstall:
 	rm -f $(BINDIR)/druby
